@@ -1,5 +1,9 @@
 package govalidator
 
+import (
+	"fmt"
+)
+
 // Errors is an array of multiple errors and conforms to the error interface.
 type Errors []error
 
@@ -19,13 +23,14 @@ func (es Errors) Error() string {
 // Error encapsulates a name, an error and whether there's a custom error message or not.
 type Error struct {
 	Name                     string
-	Err                      error
+	Err                      string
 	CustomErrorMessageExists bool
 }
 
 func (e Error) Error() string {
 	if e.CustomErrorMessageExists {
-		return e.Err.Error()
+		fmt.Println("custom ", e.Err)
+		return e.Err
 	}
-	return e.Name + ": " + e.Err.Error()
+	return e.Name + ": " + e.Err
 }
